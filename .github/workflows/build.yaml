@@ -1,18 +1,30 @@
-name: Build
+name: Test boolean input
+
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "main"
+    inputs:
+      run_migration:
+        type: boolean
+        default: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    name: test
+    runs-on: [ ubuntu-latest ]
     steps:
-      - run: echo "This is a common build"
-  deploy:
-    runs-on: ubuntu-latest
-    environment:
-      name: PRODUCTION
-    steps:
-      - run: echo "This is a production deploy"
+      - run: echo Start
+      - name: step 1
+        if: github.event.inputs.run_migration == true
+        run: |
+          echo "pre migration step" 
+
+      - name: step 2
+        if: github.event.inputs.run_migration == true
+        run: |
+          echo "migration step"
+
+      - name: step 3
+        if: github.event.inputs.run_migration == true
+        run: |
+          echo "post migration step"
+      - run: echo End
