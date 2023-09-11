@@ -14,17 +14,17 @@ jobs:
     steps:
       - run: echo Start
       - name: step 1
-        if: github.event.inputs.run_migration == true
+        if: ${{ github.event.inputs.run_migration == true }}
         run: |
           echo "pre migration step" 
 
       - name: step 2
-        if: github.event.inputs.run_migration == true
+        if: ${{ github.event.inputs.run_migration == true }}
         run: |
           echo "migration step"
 
       - name: step 3
-        if: github.event.inputs.run_migration == true
+        if: ${{ github.event.inputs.run_migration == true }}
         run: |
           echo "post migration step"
       - run: echo End
